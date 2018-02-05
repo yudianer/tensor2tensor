@@ -26,29 +26,6 @@ FLAGS = tf.flags.FLAGS
 # End-of-sentence marker.
 EOS = text_encoder.EOS_ID
 
-_ENDE_TRAIN_DATASETS = [
-    [
-        "http://data.statmt.org/wmt17/translation-task/training-parallel-nc-v12.tgz",  # pylint: disable=line-too-long
-        ("training/news-commentary-v12.de-en.en",
-         "training/news-commentary-v12.de-en.de")
-    ],
-    [
-        "http://www.statmt.org/wmt13/training-parallel-commoncrawl.tgz",
-        ("commoncrawl.de-en.en", "commoncrawl.de-en.de")
-    ],
-    [
-        "http://www.statmt.org/wmt13/training-parallel-europarl-v7.tgz",
-        ("training/europarl-v7.de-en.en", "training/europarl-v7.de-en.de")
-    ],
-]
-_ENDE_TEST_DATASETS = [
-    [
-        "http://data.statmt.org/wmt17/translation-task/dev.tgz",
-        ("dev/newstest2013.en", "dev/newstest2013.de")
-    ],
-]
-
-
 def _get_wmt_ende_bpe_dataset(directory, filename):
   """Extract the WMT en-de corpus `filename` to directory unless it's there."""
   train_path = os.path.join(directory, filename)
@@ -63,9 +40,13 @@ def _get_wmt_ende_bpe_dataset(directory, filename):
   return train_path
 
 
-@registry.register_problem
+@registry.register_problem("translate_mnzh_bpe32k")
 class TranslateMnzhBpe32k(translate.TranslateProblem):
-  """Problem spec for WMT En-De translation, BPE version."""
+  """Problem spec for WMT En-De translation, BPE version.
+
+    此表和句子都是使用的经过BPE处理之后的文件。
+    不知如何使用多个校验集？
+  """
 
   @property
   def targeted_vocab_size(self):
@@ -103,7 +84,7 @@ class TranslateMnzhBpe32k(translate.TranslateProblem):
           f.write(vocab_data)
     source_token_vocab = text_encoder.TokenTextEncoder(source_token_path, replace_oov="UNK")
     target_token_vocab = text_encoder.TokenTextEncoder(source_token_path, replace_oov="UNK")
-    return translate.token_generator(train_path + ".mn", train_path + ".zh",
+    return translate.token_generator_by_source_target(train_path + ".mn", train_path + ".zh",
                                      source_token_vocab, target_token_vocab, EOS)
 
   @property
