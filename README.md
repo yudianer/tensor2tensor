@@ -320,3 +320,7 @@ README](https://github.com/tensorflow/tensor2tensor/tree/master/tensor2tensor/da
 ---
 
 *Note: This is not an official Google product.*
+
+---
+
+*Problems met when learning were set at README-self.md*

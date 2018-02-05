@@ -50,6 +50,9 @@ from tensor2tensor.data_generators import twentybn
 from tensor2tensor.data_generators import wiki
 from tensor2tensor.data_generators import wsj_parsing
 
+# import self-defined problem
+from tensor2tensor.data_generators import translate_mnzh
+
 
 # Problem modules that require optional dependencies
 # pylint: disable=g-import-not-at-top
