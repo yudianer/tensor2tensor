@@ -16,7 +16,6 @@ of deep learning models and datasets. It has binaries to train the models and
 to download and prepare the data for you. T2T is modular and extensible and can
 be used in [notebooks](https://goo.gl/wkHexj) for prototyping your own models
 or running existing ones on your data. It is actively used and maintained by
-
 researchers and engineers within
 the [Google Brain team](https://research.google.com/teams/brain/) and was used
 to develop state-of-the-art models for translation (see

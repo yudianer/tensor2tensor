@@ -296,7 +296,7 @@ def get_local_vocab(data_dir, vocab_filename):
     return None
 
   tf.logging.info("Found vocab file: %s", vocab_filepath)
-  vocab = text_encoder.TokenTextEncoder(vocab_filepath)
+  vocab = text_encoder.SubwordTextEncoder(vocab_filepath)
 
   return vocab
 

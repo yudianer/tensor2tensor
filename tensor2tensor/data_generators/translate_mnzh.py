@@ -27,7 +27,7 @@ FLAGS = tf.flags.FLAGS
 EOS = text_encoder.EOS_ID
 
 
-@registry.register_problem("translate_mnzh_bpe32k")
+@registry.register_problem
 class TranslateMnzhBpe32k(translate.TranslateProblem):
   """Problem spec for WMT En-De translation, BPE version.
 
@@ -49,13 +49,13 @@ class TranslateMnzhBpe32k(translate.TranslateProblem):
 
   @property
   def target_vocab_name(self):
-      return "vocab.32k.ch.txt"
+      return "vocab.32k.zh.txt"
 
   def feature_encoders(self, data_dir):
     source_vocab_filename = os.path.join(data_dir, self.source_vocab_name)
     target_vocab_filename = os.path.join(data_dir, self.target_vocab_name)
-    source_encoder = text_encoder.TokenTextEncoder(source_vocab_filename, replace_oov="<unk>")
-    target_encoder = text_encoder.TokenTextEncoder(target_vocab_filename, replace_oov="<unk>")
+    source_encoder = text_encoder.TokenTextEncoder(source_vocab_filename, replace_oov="UNK")
+    target_encoder = text_encoder.TokenTextEncoder(target_vocab_filename, replace_oov="UNK")
     return {"inputs": source_encoder, "targets": target_encoder}
 
   def generator(self, data_dir, tmp_dir, train):
@@ -67,19 +67,9 @@ class TranslateMnzhBpe32k(translate.TranslateProblem):
     source_token_path = os.path.join(data_dir, self.source_vocab_name)
     target_token_path = os.path.join(data_dir, self.target_vocab_name)
 
-    with tf.gfile.GFile(source_token_path, mode="r") as f:
-      vocab_data = "<pad>\n<EOS>\n" + f.read() + "UNK\n"
-    with tf.gfile.GFile(source_token_path, mode="w") as f:
-      f.write(vocab_data)
-
-    with tf.gfile.GFile(target_token_path, mode="r") as f:
-      vocab_data = "<pad>\n<EOS>\n" + f.read() + "UNK\n"
-    with tf.gfile.GFile(target_token_path, mode="w") as f:
-      f.write(vocab_data)
-
     source_token_vocab = text_encoder.TokenTextEncoder(source_token_path, replace_oov="UNK")
     target_token_vocab = text_encoder.TokenTextEncoder(target_token_path, replace_oov="UNK")
-    return translate.token_generator_by_source_target(train_path + ".mn", train_path + ".ch",
+    return translate.token_generator_by_source_target(train_path + ".mn", train_path + ".zh",
                                      source_token_vocab, target_token_vocab, EOS)
 
   @property
