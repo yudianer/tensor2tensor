@@ -49,7 +49,7 @@ class TranslateMnzhBpe32k(translate.TranslateProblem):
 
   @property
   def target_vocab_name(self):
-      return "vocab.32k.zh.txt"
+      return "vocab.32k.ch.txt"
 
   def feature_encoders(self, data_dir):
     source_vocab_filename = os.path.join(data_dir, self.source_vocab_name)
@@ -73,7 +73,7 @@ class TranslateMnzhBpe32k(translate.TranslateProblem):
     #       f.write(vocab_data)
     source_token_vocab = text_encoder.TokenTextEncoder(source_token_path, replace_oov="UNK")
     target_token_vocab = text_encoder.TokenTextEncoder(target_token_path, replace_oov="UNK")
-    return translate.token_generator_by_source_target(train_path + ".mn", train_path + ".zh",
+    return translate.token_generator_by_source_target(train_path + ".mn", train_path + ".ch",
                                      source_token_vocab, target_token_vocab, EOS)
 
   @property
