@@ -1389,8 +1389,4 @@ def transformer_jack():
   A set of basic hyperparameters from jack_basic_params.json set by Jack
   """
   hparams = jack_common_hparams.jack_basic_params()
-  print("重要參數：")
-  print('batch_size: ' + str(hparams.batch_size))
-  print('train_steps: ' + str(hparams.train_steps))
-  print('worker_gpu: ' + str(hparams.worker_gpu))
   return hparams
