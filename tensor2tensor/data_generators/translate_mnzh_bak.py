@@ -1,16 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Created by Jack on 04/02/2018
@@ -54,30 +41,30 @@ FLAGS = tf.flags.FLAGS
 EOS = text_encoder.EOS_ID
 
 
-@registry.register_problem
-class TranslateEnzhWmt32k(translate.TranslateProblem):
+@registry.register_problem("translate_mnzh_by_32kbpe")
+class TranslateMnzh32k(translate.TranslateProblem):
   """
     Problem spec for Mn_unicode-zh translation.
   """
   @property
   def targeted_vocab_size(self):
-    return 2**15  # 32k
+    return 32000  # 32k
 
   @property
   def source_vocab_name(self):
-    return "vocab.%d.ch.txt" % self.targeted_vocab_size
+    return "vocab.32k.mn.txt"
 
   @property
   def target_vocab_name(self):
-    return "vocab.%d.mn.txt" % self.targeted_vocab_size
+    return "vocab.32k.ch.txt"
 
 
   def generator(self, data_dir, tmp_dir, train):
-    source_vocab = generator_utils.get_local_vocab(data_dir,self.source_vocab_name())
-    target_vocab = generator_utils.get_local_vocab(data_dir,self.targeted_vocab_size)
+    source_vocab = os.path.join(data_dir,self.source_vocab_name)
+    target_vocab = os.path.join(data_dir,self.target_vocab_name)
     tag = "train" if train else "dev"
 
-    filename_base = "%s.%d" % (self.targeted_vocab_size, tag)
+    filename_base = "%s.32k" % tag
     """Concatenate all `datasets` and save to `filename`.   return tmp_dir/filename_base """
 
     data_path = os.path.join(data_dir,filename_base)
@@ -98,9 +85,11 @@ class TranslateEnzhWmt32k(translate.TranslateProblem):
         A dictionary {"inputs": source-line, "targets": target-line} where
         the lines are integer lists converted from tokens in the file lines.
       """
-    return translate.bi_vocabs_token_generator(data_path + ".mn.shuf",
-                                               data_path + ".ch.shuf",
-                                               source_vocab, target_vocab, EOS)
+    source_token_vocab = text_encoder.TokenTextEncoder(source_vocab, replace_oov="UNK")
+    target_token_vocab = text_encoder.TokenTextEncoder(target_vocab, replace_oov="UNK")
+    return translate.token_generator_by_source_target(data_path + ".mn",
+                                               data_path + ".ch",
+                                                      source_token_vocab, target_token_vocab, EOS)
 
   @property
   def input_space_id(self):
@@ -113,8 +102,8 @@ class TranslateEnzhWmt32k(translate.TranslateProblem):
   def feature_encoders(self, data_dir):
     source_vocab_filename = os.path.join(data_dir, self.source_vocab_name)
     target_vocab_filename = os.path.join(data_dir, self.target_vocab_name)
-    source_token = text_encoder.SubwordTextEncoder(source_vocab_filename)
-    target_token = text_encoder.SubwordTextEncoder(target_vocab_filename)
+    source_token = text_encoder.TokenTextEncoder(source_vocab_filename)
+    target_token = text_encoder.TokenTextEncoder(target_vocab_filename)
     return {
         "inputs": source_token,
         "targets": target_token,
