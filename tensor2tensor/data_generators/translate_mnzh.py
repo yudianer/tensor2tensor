@@ -27,7 +27,7 @@ FLAGS = tf.flags.FLAGS
 EOS = text_encoder.EOS_ID
 
 
-@registry.register_problem
+@registry.register_problem()
 class TranslateMnzhBpe32k(translate.TranslateProblem):
   """Problem spec for WMT En-De translation, BPE version.
 
@@ -66,11 +66,6 @@ class TranslateMnzhBpe32k(translate.TranslateProblem):
 
     source_token_path = os.path.join(data_dir, self.source_vocab_name)
     target_token_path = os.path.join(data_dir, self.target_vocab_name)
-    # for token_path in [source_token_path, target_token_path]:
-    #     with tf.gfile.GFile(token_path, mode="r") as f:
-    #       vocab_data = "<pad>\n<EOS>\n" + f.read() + "UNK\n"
-    #     with tf.gfile.GFile(token_path, mode="w") as f:
-    #       f.write(vocab_data)
     source_token_vocab = text_encoder.TokenTextEncoder(source_token_path, replace_oov="UNK")
     target_token_vocab = text_encoder.TokenTextEncoder(target_token_path, replace_oov="UNK")
     return translate.token_generator_by_source_target(train_path + ".mn", train_path + ".ch",

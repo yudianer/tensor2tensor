@@ -35,6 +35,7 @@ from tensor2tensor.utils import expert_utils
 from tensor2tensor.utils import registry
 from tensor2tensor.utils import t2t_model
 
+from tensor2tensor.layers import jack_common_hparams
 import tensorflow as tf
 
 from tensorflow.python.util import nest
@@ -1380,4 +1381,16 @@ def transformer_lm_tpu_1():
   hparams = transformer_lm_tpu_0()
   hparams.hidden_size = 2048
   hparams.filter_size = 8192
+  return hparams
+
+@registry.register_hparams("transformer_jack")
+def transformer_jack():
+  """
+  A set of basic hyperparameters from jack_basic_params.json set by Jack
+  """
+  hparams = jack_common_hparams.jack_basic_params()
+  print("重要參數：")
+  print('batch_size: ' + hparams.batch_size)
+  print('train_steps: ' + hparams.train_steps)
+  print('worker_gpu: ' + hparams.worker_gpu)
   return hparams
