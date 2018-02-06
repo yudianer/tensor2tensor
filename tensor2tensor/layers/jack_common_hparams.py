@@ -35,9 +35,9 @@ def jack_basic_params():
   A set of basic hyperparameters from jack_basic_params.json set by Jack
   """
   hparams = tf.contrib.training.HParams()
-  jack_basic_params = json.load(open('jack_basic_params.json'))
+  jack_basic_params = json.load(open('jack_t2t_params.json'))
   for key in jack_basic_params.keys():
       value = jack_basic_params[key]
       if value:
-        hparams.add_hparam(key, jack_basic_params[key])
+        hparams.add_hparam(key, value)
   return jack_basic_params
