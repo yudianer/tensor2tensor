@@ -85,8 +85,8 @@ class TranslateMnzh32k(translate.TranslateProblem):
         A dictionary {"inputs": source-line, "targets": target-line} where
         the lines are integer lists converted from tokens in the file lines.
       """
-    source_token_vocab = text_encoder.TokenTextEncoder(source_vocab, replace_oov="UNK")
-    target_token_vocab = text_encoder.TokenTextEncoder(target_vocab, replace_oov="UNK")
+    source_token_vocab = text_encoder.TokenTextEncoder(source_vocab, replace_oov="<unk>")
+    target_token_vocab = text_encoder.TokenTextEncoder(target_vocab, replace_oov="<unk>")
     return translate.token_generator_by_source_target(data_path + ".mn",
                                                data_path + ".ch",
                                                       source_token_vocab, target_token_vocab, EOS)

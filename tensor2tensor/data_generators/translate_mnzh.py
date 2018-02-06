@@ -27,7 +27,7 @@ FLAGS = tf.flags.FLAGS
 EOS = text_encoder.EOS_ID
 
 
-@registry.register_problem()
+@registry.register_problem("translate_mnzh_bpe32k")
 class TranslateMnzhBpe32k(translate.TranslateProblem):
   """Problem spec for WMT En-De translation, BPE version.
 
@@ -54,8 +54,8 @@ class TranslateMnzhBpe32k(translate.TranslateProblem):
   def feature_encoders(self, data_dir):
     source_vocab_filename = os.path.join(data_dir, self.source_vocab_name)
     target_vocab_filename = os.path.join(data_dir, self.target_vocab_name)
-    source_encoder = text_encoder.TokenTextEncoder(source_vocab_filename, replace_oov="UNK")
-    target_encoder = text_encoder.TokenTextEncoder(target_vocab_filename, replace_oov="UNK")
+    source_encoder = text_encoder.TokenTextEncoder(source_vocab_filename, replace_oov="<unk>")
+    target_encoder = text_encoder.TokenTextEncoder(target_vocab_filename, replace_oov="<unk>")
     return {"inputs": source_encoder, "targets": target_encoder}
 
   def generator(self, data_dir, tmp_dir, train):
@@ -66,8 +66,8 @@ class TranslateMnzhBpe32k(translate.TranslateProblem):
 
     source_token_path = os.path.join(data_dir, self.source_vocab_name)
     target_token_path = os.path.join(data_dir, self.target_vocab_name)
-    source_token_vocab = text_encoder.TokenTextEncoder(source_token_path, replace_oov="UNK")
-    target_token_vocab = text_encoder.TokenTextEncoder(target_token_path, replace_oov="UNK")
+    source_token_vocab = text_encoder.TokenTextEncoder(source_token_path, replace_oov="<unk>")
+    target_token_vocab = text_encoder.TokenTextEncoder(target_token_path, replace_oov="<unk>")
     return translate.token_generator_by_source_target(train_path + ".mn", train_path + ".ch",
                                      source_token_vocab, target_token_vocab, EOS)
 
