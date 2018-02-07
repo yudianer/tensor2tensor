@@ -475,7 +475,7 @@ class Problem(object):
     Raises:
       ValueError: if num_partitions is greater than the number of data files.
     """
-    num_threads=FLAGS.num_threads
+    # num_threads=FLAGS.num_threads
     is_training = mode == tf.estimator.ModeKeys.TRAIN
     repeat = repeat or repeat is None and is_training
     shuffle_files = shuffle_files or shuffle_files is None and is_training

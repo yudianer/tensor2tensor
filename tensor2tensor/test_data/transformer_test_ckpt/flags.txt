@@ -47,4 +47,4 @@
 --worker_job=/job:localhost
 --model=transformer
 --parsing_path=
---num_threads=4
+--num_threads=30
