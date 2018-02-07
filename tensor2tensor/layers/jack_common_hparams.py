@@ -36,7 +36,7 @@ def jack_common_hparams():
       pos="timing",
       sampling_temp=1.0,
       num_encoder_layers=6,
-      learning_rate=1.0,
+      learning_rate=0.1,
       daisy_chain_variables=True,
       num_hidden_layers=6,
       self_attention_type="dot_product",
