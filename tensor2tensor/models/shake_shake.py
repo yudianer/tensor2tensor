@@ -167,7 +167,7 @@ def shakeshake_small():
   hparams.hidden_size = 32
   hparams.layer_prepostprocess_dropout = 0.0
   hparams.dropout = 0
-  hparams.label_smoothing = 0.0
+  hparams.label_smoothing = 0.1
   hparams.clip_grad_norm = 0.0  # No clipping for now, one can also try 2.0.
   hparams.num_hidden_layers = 26
   hparams.learning_rate_decay_scheme = "cosine"
