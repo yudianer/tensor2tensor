@@ -75,7 +75,7 @@ def jack_common_hparams():
       layer_prepostprocess_dropout=0.1,
       input_modalities="default",
       label_smoothing=0.1,
-      learning_rate_decay_steps=5000,
+      learning_rate_decay_steps=2000,
       learning_rate_minimum=None,
       layer_preprocess_sequence="n",
       learning_rate_decay_staircase=False,
