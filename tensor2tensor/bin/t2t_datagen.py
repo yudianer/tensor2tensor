@@ -210,10 +210,10 @@ def generate_data_in_process(arg):
 
 
 def generate_data_for_registered_problem(problem_name):
-  print(FLAGS)
-  print(FLAGS.num_threads)
-  intputs = input("input:")
-  print(intputs)
+  # print(FLAGS)
+  # print(FLAGS.num_threads)
+  # intputs = input("input:")
+  # print(intputs)
   tf.logging.info("Generating data for %s.", problem_name)
   if FLAGS.num_shards:
     raise ValueError("--num_shards should not be set for registered Problem.")
