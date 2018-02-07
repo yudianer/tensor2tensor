@@ -436,7 +436,7 @@ class Problem(object):
   def dataset(self,
               mode,
               data_dir=None,
-              num_threads=None,
+              num_threads=15,
               output_buffer_size=None,
               shuffle_files=None,
               repeat=None,
