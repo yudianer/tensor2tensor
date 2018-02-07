@@ -78,7 +78,7 @@ flags.DEFINE_string("t2t_usr_dir", "",
                     "The imported files should contain registrations, "
                     "e.g. @registry.register_problem calls, that will then be "
                     "available to t2t-datagen.")
-flags.DEFINE_integer("num_threads", 25)
+flags.DEFINE_integer("num_threads", 25,'num_threads')
 # Mapping from problems that we can generate data for to their generators.
 # pylint: disable=g-long-lambda
 _SUPPORTED_PROBLEM_GENERATORS = {

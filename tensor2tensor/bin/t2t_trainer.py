@@ -56,7 +56,6 @@ flags.DEFINE_bool("generate_data", False, "Generate data before training?")
 flags.DEFINE_string("tmp_dir", "/tmp/t2t_datagen",
                     "Temporary storage directory, used if --generate_data.")
 flags.DEFINE_bool("profile", False, "Profile performance?")
-# flags.DEFINE_integer("num_threads", 20, "num_threads")
 FLAGS.num_threads=20
 # To maintain compatibility with some internal libs, we guard against these flag
 # definitions possibly erroring. Apologies for the ugliness.

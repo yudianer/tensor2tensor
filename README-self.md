@@ -1,5 +1,5 @@
 ## Problems met during learning t2t will be set here.
-####  Add Problem
+###  Add Problem
 In addition to defining "Problem" class, add your "Problem" into **tensor2tensor/tensor2tensor/data_generators/all_problems.py** like this: 
 ``` 
 from tensor2tensor.data_generators import translate_mnzh
@@ -10,8 +10,8 @@ Here, module **translate_mnzh.py** is set below data_generators.
 
 After running  ` t2t-datagen `, your "Problem" will be found from the output. 
 
-#### Train 
-##### Run this script below within python environment of python3, otherwise, an error like 'InvalidArgumentError: indices[0] = -1 is not in [0, 2) will possibly come out'
+### Train 
+#### Run this script below within python environment of python3, otherwise, an error like 'InvalidArgumentError: indices[0] = -1 is not in [0, 2) will possibly come out'
 ```bash
 #!/bin/bash
 PROBLEM=translate_mnzh_bpe32k
@@ -43,7 +43,15 @@ t2t-trainer \
   --output_dir=$TRAIN_DIR
 
 ```
-#### T2T ( tensor2tensor ) Possible Params(Not flags)
+### About saving the trained model
+   *: It is advised that flag '--export_saved_model' has been DEPRECATED. 
+     Instead, we are supposed to use "serving/export.py"*
+```python
+flags.DEFINE_bool("export_saved_model", False,
+                  "DEPRECATED - see serving/export.py.")
+```
+
+### T2T ( tensor2tensor ) Possible Params(Not flags)
 ```python
 relu_dropout_broadcast_dims="",
 min_length_bucket=8,
