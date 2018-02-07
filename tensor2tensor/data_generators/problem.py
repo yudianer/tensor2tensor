@@ -29,7 +29,8 @@ from tensor2tensor.utils import metrics
 from tensor2tensor.utils import registry
 import tensorflow as tf
 
-
+flags = tf.flags
+FLAGS = flags.FLAGS
 
 class SpaceID(object):
   """Input and target space ids. Add more as needed."""
@@ -474,6 +475,7 @@ class Problem(object):
     Raises:
       ValueError: if num_partitions is greater than the number of data files.
     """
+    num_threads=FLAGS.num_threads
     is_training = mode == tf.estimator.ModeKeys.TRAIN
     repeat = repeat or repeat is None and is_training
     shuffle_files = shuffle_files or shuffle_files is None and is_training

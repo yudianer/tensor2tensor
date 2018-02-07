@@ -118,5 +118,7 @@ def jack_common_hparams():
       ffn_layer="dense_relu_dense",
       max_relative_position=0,
       attention_dropout_broadcast_dims="",
-      length_bucket_step=1.1
+      length_bucket_step=1.1,
+      learning_rate_boundaries=[0],
+      shared_source_target_embedding=False
   )

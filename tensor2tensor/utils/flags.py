@@ -111,3 +111,4 @@ flags.DEFINE_string(
     "decode_hparams", "",
     "Comma-separated list of name=value pairs to control decode behavior. "
     "See decoding.decode_hparams for defaults.")
+flags.DEFINE_integer("num_threads", 4, "int, number of threads to use for decode and preprocess Dataset.map calls.")
