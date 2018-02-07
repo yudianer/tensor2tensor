@@ -10,6 +10,7 @@ Here, module **translate_mnzh.py** is set below data_generators.
 
 After running  ` t2t-datagen `, your "Problem" will be found from the output. 
 
+---
 ### Train 
 #### Run this script below within python environment of python3, otherwise, an error like 'InvalidArgumentError: indices[0] = -1 is not in [0, 2) will possibly come out'
 ```bash
@@ -43,6 +44,7 @@ t2t-trainer \
   --output_dir=$TRAIN_DIR
 
 ```
+---
 ### About saving the trained model
    *: It is advised that flag '--export_saved_model' has been DEPRECATED. 
      Instead, we are supposed to use "serving/export.py"*
@@ -50,6 +52,28 @@ t2t-trainer \
 flags.DEFINE_bool("export_saved_model", False,
                   "DEPRECATED - see serving/export.py.")
 ```
+---
+
+
+### Params & Flags
+* Q: How many threads will be used? <br>
+  [A:  If you are computing on CPU (not GPU), TensorFlow uses all available CPU cores by default.<br>
+  You can limit this to N cores by adding the following lines:
+  ](https://github.com/tensorflow/tensor2tensor/issues/563)
+ ```python
+    intra_op_parallelism_threads=N,
+    inter_op_parallelism_threads=N,
+```
+to
+```
+tensor2tensor/tensor2tensor/utils/trainer_lib.py
+config = tf.ConfigProto( 
+allow_soft_placement=True, 
+graph_options=graph_options, 
+gpu_options=gpu_options, 
+log_device_placement=log_device_placement) 
+```
+---
 
 ### T2T ( tensor2tensor ) Possible Params(Not flags)
 ```python
