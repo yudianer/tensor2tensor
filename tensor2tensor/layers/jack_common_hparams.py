@@ -45,7 +45,7 @@ def jack_common_hparams():
       proximity_bias=False,
       moe_k=2,
       clip_grad_norm=0.0,
-      layer_postprocess_sequence="layer_norm",
+      layer_postprocess_sequence="da",
       learning_rate_decay_scheme="exp",
       scheduled_sampling_prob=0.0,
       weight_noise=0.0,
