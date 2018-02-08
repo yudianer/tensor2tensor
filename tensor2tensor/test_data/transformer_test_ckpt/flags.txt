@@ -14,7 +14,7 @@
 --iterations_per_loop=1000
 --registry_help=False
 --worker_gpu=1
---keep_checkpoint_max=20
+--keep_checkpoint_max=5
 --save_checkpoints_secs=0
 --gpu_order=
 --master=
@@ -47,4 +47,4 @@
 --worker_job=/job:localhost
 --model=transformer
 --parsing_path=
---num_threads=30
+
