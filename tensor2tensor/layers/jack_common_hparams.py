@@ -60,7 +60,7 @@ def jack_common_hparams():
       initializer="uniform_unit_scaling",
       hidden_size=512,
       force_full_predict=False,
-      learning_rate_decay_rate=0.96,
+      learning_rate_decay_rate=0.8,
       symbol_modality_skip_top=False,
       sampling_method="argmax",
       summarize_vars=False,
