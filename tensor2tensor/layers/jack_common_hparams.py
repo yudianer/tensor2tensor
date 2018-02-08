@@ -46,7 +46,7 @@ def jack_common_hparams():
       moe_k=2,
       clip_grad_norm=0.0,
       layer_postprocess_sequence="da",
-      learning_rate_decay_scheme="exp",
+      learning_rate_decay_scheme="noam",
       scheduled_sampling_prob=0.0,
       weight_noise=0.0,
       initializer_gain=1.0,
