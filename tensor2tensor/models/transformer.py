@@ -1388,15 +1388,15 @@ def transformer_lm_tpu_1():
 def transformer_jack():
     hparams = transformer_base_single_gpu()
     hparams.learning_rate_warmup_steps=4000
-    hparams.learning_rate=1.0
-    hparams.num_encoder_layers=6
-    hparams.decode_alpha=0.6
-    hparams.label_smoothing=0.1
+    hparams.learning_rate=0.01
+    # hparams.num_encoder_layers=6
+    # hparams.decode_alpha=0.6
+    # hparams.label_smoothing=0.1
     hparams.optimizer_adam_beta2=0.98
-    hparams.initializer="uniform_unit_scaling"
-    hparams.num_decoder_layers=6
-    hparams.shared_source_target_embedding=False
-    hparams.shared_embedding_and_softmax_weights=False
+    hparams.initializer="normal_unit_scaling"
+    # hparams.num_decoder_layers=6
+    # hparams.shared_source_target_embedding=False
+    # hparams.shared_embedding_and_softmax_weights=False
 
 
     return hparams
