@@ -1389,7 +1389,7 @@ def transformer_jack():
     hparams = transformer_base_single_gpu()
     hparams.learning_rate_warmup_steps=4000
     hparams.learning_rate=0.01
-    hparams.batch_size=6250
+    hparams.batch_size=4096
     hparams.learning_rate_decay_scheme="exp"
     # hparams.num_encoder_layers=6
     # hparams.decode_alpha=0.6
