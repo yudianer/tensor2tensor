@@ -35,9 +35,9 @@ class TranslateMnzhBpe32k(translate.TranslateProblem):
     不知如何使用多个校验集？
   """
 
-  @property
-  def targeted_vocab_size(self):
-    return 32000
+  # @property
+  # def targeted_vocab_size(self):
+  #   return 32000
 
 #  @property
 #  def vocab_name(self):
