@@ -78,7 +78,7 @@ class TranslateMnzhBpe32k(translate.TranslateProblem):
 
     source_token_vocab = text_encoder.TokenTextEncoder(source_token_path, replace_oov="UNK")
     target_token_vocab = text_encoder.TokenTextEncoder(target_token_path, replace_oov="UNK")
-    return translate.token_generator_by_source_target(train_path + ".mn.shuf", train_path + ".ch.shuf",
+    return translate.token_generator_by_source_target(train_path + ".mn", train_path + ".ch",
                                      source_token_vocab, target_token_vocab, EOS)
 
   @property
