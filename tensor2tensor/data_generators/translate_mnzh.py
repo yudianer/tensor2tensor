@@ -66,15 +66,15 @@ class TranslateMnzhBpe32k(translate.TranslateProblem):
 
     source_token_path = os.path.join(data_dir, self.source_vocab_name)
     target_token_path = os.path.join(data_dir, self.target_vocab_name)
-    # with tf.gfile.GFile(source_token_path, mode="r") as f:
-    #   vocab_data = "<pad>\n<EOS>\n" + f.read() + "UNK\n"
-    # with tf.gfile.GFile(source_token_path, mode="w") as f:
-    #   f.write(vocab_data)
-    #
-    # with tf.gfile.GFile(target_token_path, mode="r") as f:
-    #   vocab_data = "<pad>\n<EOS>\n" + f.read() + "UNK\n"
-    # with tf.gfile.GFile(target_token_path, mode="w") as f:
-    #   f.write(vocab_data)
+    with tf.gfile.GFile(source_token_path, mode="r") as f:
+      vocab_data = "<pad>\n<EOS>\n" + f.read() + "UNK\n"
+    with tf.gfile.GFile(source_token_path, mode="w") as f:
+      f.write(vocab_data)
+
+    with tf.gfile.GFile(target_token_path, mode="r") as f:
+      vocab_data = "<pad>\n<EOS>\n" + f.read() + "UNK\n"
+    with tf.gfile.GFile(target_token_path, mode="w") as f:
+      f.write(vocab_data)
 
     source_token_vocab = text_encoder.TokenTextEncoder(source_token_path, replace_oov="UNK")
     target_token_vocab = text_encoder.TokenTextEncoder(target_token_path, replace_oov="UNK")
