@@ -390,6 +390,32 @@ def get_or_generate_vocab(data_dir, tmp_dir, vocab_filename, vocab_size,
                                      generate())
 
 
+def get_or_generate_local(data_dir, vocab_filename, vocab_size,
+                          local_sources, file_byte_budget=1e6):
+  """Generate a vocabulary from the datasets in sources."""
+
+  def generate():
+    tf.logging.info("Generating vocab from local: %s", str(local_sources))
+    for source in local_sources:
+      # Use Tokenizer to count the word occurrences.
+      with tf.gfile.GFile(source, mode="r") as source_file:
+        file_byte_budget_ = file_byte_budget
+        counter = 0
+        countermax = int(source_file.size() / file_byte_budget_ / 2)
+        for line in source_file:
+          if counter < countermax:
+            counter += 1
+          else:
+            if file_byte_budget_ <= 0:
+              break
+            line = line.strip()
+            file_byte_budget_ -= len(line)
+            counter = 0
+            yield line
+
+  return get_or_generate_vocab_inner(data_dir, vocab_filename, vocab_size,
+                                     generate())
+
 def get_or_generate_tabbed_vocab(data_dir, tmp_dir, source_filename,
                                  index, vocab_filename, vocab_size):
   r"""Generate a vocabulary from a tabbed source file.
