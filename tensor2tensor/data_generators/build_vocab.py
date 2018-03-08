@@ -51,7 +51,8 @@ def build_vocab(sources, vocab_path, vocab_size):
   words = words[:vocab_size]
 
   with open(vocab_path, "w") as f:
-    f.write("\n".join(words))
+      for word in words:
+          f.write(word+'\n')
 
 
 if __name__ == '__main__':

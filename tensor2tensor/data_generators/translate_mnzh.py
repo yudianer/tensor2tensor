@@ -62,11 +62,11 @@ class TranslateMnzhBpe32k(translate.TranslateProblem):
                     if train else "valid.32k")
     train_path = os.path.join(data_dir, dataset_path)
 
-    token_path = generator_utils.get_or_generate_local(
+    vocab = generator_utils.get_or_generate_local(
       data_dir, self.vocab_file, self.targeted_vocab_size,
       ['train.32k.mn', 'train.32k.ch', 'valid.32k.mn', 'valid.32k.ch'])
 
-    # token_path = os.path.join(data_dir, self.vocab_file)
+    token_path = os.path.join(data_dir, self.vocab_file)
     with tf.gfile.GFile(token_path, mode="r") as f:
       vocab_data = "<pad>\n<EOS>\n" + f.read() + "UNK\n"
     with tf.gfile.GFile(token_path, mode="w") as f:

@@ -335,7 +335,7 @@ def get_or_generate_vocab_inner(data_dir, vocab_filename, vocab_size,
 
   if vocab_filepath is not None:
     vocab.store_to_file(vocab_filepath)
-  return vocab
+  return vocab_filepath
 
 
 def get_or_generate_vocab(data_dir, tmp_dir, vocab_filename, vocab_size,
